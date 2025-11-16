@@ -111,27 +111,39 @@ const Index = () => {
                 <h3 className="font-display text-3xl text-gatsby-gold">Дресс-код</h3>
               </div>
               <div className="h-px bg-gatsby-gold/20 mb-6"></div>
-              <div className="space-y-3 text-gatsby-cream/90">
-                <p className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-gatsby-gold rounded-full"></span>
-                  Коктейльные платья
-                </p>
-                <p className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-gatsby-gold rounded-full"></span>
-                  Смокинги
-                </p>
+              <div className="space-y-4 text-gatsby-cream/90">
+                <div>
+                  <p className="font-display text-lg text-gatsby-gold mb-2">Мужчины</p>
+                  <p className="text-sm leading-relaxed">Подтяжки и бабочки. Шляпы тоже приветствуются</p>
+                </div>
+                <div>
+                  <p className="font-display text-lg text-gatsby-gold mb-2">Женщины</p>
+                  <p className="text-sm leading-relaxed">Платье, боа и улыбка</p>
+                </div>
               </div>
             </Card>
           </div>
 
-          <div className="flex justify-center items-center gap-3 mt-20">
-            <div className="h-px w-20 bg-gradient-to-r from-transparent to-gatsby-gold"></div>
-            <div className="flex gap-2">
-              <div className="w-2 h-2 bg-gatsby-gold rotate-45"></div>
-              <div className="w-3 h-3 border-2 border-gatsby-gold rotate-45"></div>
-              <div className="w-2 h-2 bg-gatsby-gold rotate-45"></div>
+          <div className="max-w-3xl mx-auto mt-16 space-y-6 text-center">
+            <div className="flex justify-center items-center gap-3 mb-8">
+              <div className="h-px w-20 bg-gradient-to-r from-transparent to-gatsby-gold"></div>
+              <div className="flex gap-2">
+                <div className="w-2 h-2 bg-gatsby-gold rotate-45"></div>
+                <div className="w-3 h-3 border-2 border-gatsby-gold rotate-45"></div>
+                <div className="w-2 h-2 bg-gatsby-gold rotate-45"></div>
+              </div>
+              <div className="h-px w-20 bg-gradient-to-l from-transparent to-gatsby-gold"></div>
             </div>
-            <div className="h-px w-20 bg-gradient-to-l from-transparent to-gatsby-gold"></div>
+            
+            <p className="text-gatsby-cream/80 text-lg leading-relaxed px-4">
+              Погрузитесь в атмосферу 1920-х годов, когда стиль и элегантность были на пике моды. 
+              Одевайтесь в лучшие наряды, ведь вечер обещает быть незабываемым!
+            </p>
+            
+            <p className="text-gatsby-gold/90 font-display text-xl leading-relaxed px-4">
+              Давайте вместе отпразднуем эту важную веху и создадим воспоминания, 
+              которые останутся с нами навсегда!
+            </p>
           </div>
         </div>
       </section>
