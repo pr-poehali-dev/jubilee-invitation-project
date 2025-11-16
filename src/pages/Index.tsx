@@ -1,7 +1,18 @@
 import Icon from '@/components/ui/icon';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 
 const Index = () => {
+  const [selectedResponse, setSelectedResponse] = useState<string | null>(null);
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  const handleResponse = (response: string) => {
+    setSelectedResponse(response);
+    setShowThankYou(true);
+    setTimeout(() => setShowThankYou(false), 3000);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gatsby-black via-gatsby-dark to-gatsby-black text-gatsby-cream">
       
@@ -156,6 +167,72 @@ const Index = () => {
               Давайте вместе отпразднуем эту важную веху и создадим воспоминания, 
               которые останутся с нами навсегда!
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative py-24 px-4">
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="h-px w-16 bg-gatsby-gold"></div>
+              <Icon name="Heart" className="text-gatsby-gold" size={24} />
+              <div className="h-px w-16 bg-gatsby-gold"></div>
+            </div>
+            <h2 className="font-display text-5xl md:text-6xl text-gatsby-gold mb-6">Подтвердите присутствие</h2>
+            <p className="text-gatsby-cream/80 text-lg">Сообщите, будете ли вы на празднике</p>
+          </div>
+
+          <Card className="bg-gatsby-dark/60 border-2 border-gatsby-gold/30 p-8 md:p-12 backdrop-blur-sm">
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button
+                  onClick={() => handleResponse('accept')}
+                  className={`font-display text-lg px-8 py-6 transition-all duration-300 ${
+                    selectedResponse === 'accept'
+                      ? 'bg-gatsby-gold text-gatsby-black hover:bg-gatsby-gold/90 scale-105'
+                      : 'bg-gatsby-gold/20 text-gatsby-gold border-2 border-gatsby-gold/40 hover:bg-gatsby-gold/30 hover:border-gatsby-gold/60'
+                  }`}
+                >
+                  <Icon name="Check" size={20} className="mr-2" />
+                  С удовольствием приду
+                </Button>
+                
+                <Button
+                  onClick={() => handleResponse('decline')}
+                  className={`font-display text-lg px-8 py-6 transition-all duration-300 ${
+                    selectedResponse === 'decline'
+                      ? 'bg-gatsby-cream/20 text-gatsby-cream border-2 border-gatsby-cream/60 scale-105'
+                      : 'bg-gatsby-dark border-2 border-gatsby-gold/20 text-gatsby-cream/70 hover:border-gatsby-gold/40'
+                  }`}
+                >
+                  <Icon name="X" size={20} className="mr-2" />
+                  К сожалению, не смогу
+                </Button>
+              </div>
+
+              {showThankYou && (
+                <div className="text-center animate-fade-in">
+                  <div className="inline-block px-6 py-3 bg-gatsby-gold/20 border border-gatsby-gold/40 rounded-lg">
+                    <p className="text-gatsby-gold font-display text-lg">
+                      {selectedResponse === 'accept' 
+                        ? '✨ Прекрасно! Жду вас на празднике!' 
+                        : 'Благодарю за ответ'}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </Card>
+
+          <div className="flex justify-center items-center gap-3 mt-16">
+            <div className="h-px w-20 bg-gradient-to-r from-transparent to-gatsby-gold"></div>
+            <div className="flex gap-2">
+              <div className="w-2 h-2 bg-gatsby-gold rotate-45"></div>
+              <div className="w-3 h-3 border-2 border-gatsby-gold rotate-45"></div>
+              <div className="w-2 h-2 bg-gatsby-gold rotate-45"></div>
+            </div>
+            <div className="h-px w-20 bg-gradient-to-l from-transparent to-gatsby-gold"></div>
           </div>
         </div>
       </section>
