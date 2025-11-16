@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "Submit RSVP accept",
+      "method": "POST",
+      "body": {
+        "guestName": "Иван Петров",
+        "responseType": "accept"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get RSVP statistics",
+      "method": "GET",
+      "expectedStatus": 200
+    }
+  ]
+}

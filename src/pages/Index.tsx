@@ -1,16 +1,48 @@
 import Icon from '@/components/ui/icon';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useState } from 'react';
+
+const RSVP_API = 'https://functions.poehali.dev/6c6c7a3a-41c6-4904-827c-e9b27ef94f55';
 
 const Index = () => {
   const [selectedResponse, setSelectedResponse] = useState<string | null>(null);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [guestName, setGuestName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleResponse = (response: string) => {
-    setSelectedResponse(response);
-    setShowThankYou(true);
-    setTimeout(() => setShowThankYou(false), 3000);
+  const handleResponse = async (response: string) => {
+    if (!guestName.trim()) {
+      alert('Пожалуйста, укажите ваше имя');
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const res = await fetch(RSVP_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          guestName: guestName.trim(),
+          responseType: response
+        })
+      });
+
+      if (res.ok) {
+        setSelectedResponse(response);
+        setShowThankYou(true);
+        setTimeout(() => setShowThankYou(false), 3000);
+      }
+    } catch (error) {
+      console.error('Error submitting RSVP:', error);
+      alert('Произошла ошибка. Попробуйте еще раз.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -185,13 +217,26 @@ const Index = () => {
 
           <Card className="bg-gatsby-dark/60 border-2 border-gatsby-gold/30 p-8 md:p-12 backdrop-blur-sm">
             <div className="space-y-6">
+              <div className="max-w-md mx-auto">
+                <label className="block text-gatsby-cream/80 mb-2 font-display text-lg">Ваше имя</label>
+                <Input
+                  type="text"
+                  placeholder="Введите ваше имя"
+                  value={guestName}
+                  onChange={(e) => setGuestName(e.target.value)}
+                  className="bg-gatsby-dark/80 border-2 border-gatsby-gold/30 text-gatsby-cream placeholder:text-gatsby-cream/40 focus:border-gatsby-gold/60 font-sans text-lg py-6"
+                  disabled={isSubmitting || selectedResponse !== null}
+                />
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   onClick={() => handleResponse('accept')}
+                  disabled={isSubmitting || selectedResponse !== null}
                   className={`font-display text-lg px-8 py-6 transition-all duration-300 ${
                     selectedResponse === 'accept'
                       ? 'bg-gatsby-gold text-gatsby-black hover:bg-gatsby-gold/90 scale-105'
-                      : 'bg-gatsby-gold/20 text-gatsby-gold border-2 border-gatsby-gold/40 hover:bg-gatsby-gold/30 hover:border-gatsby-gold/60'
+                      : 'bg-gatsby-gold/20 text-gatsby-gold border-2 border-gatsby-gold/40 hover:bg-gatsby-gold/30 hover:border-gatsby-gold/60 disabled:opacity-50 disabled:cursor-not-allowed'
                   }`}
                 >
                   <Icon name="Check" size={20} className="mr-2" />
@@ -200,10 +245,11 @@ const Index = () => {
                 
                 <Button
                   onClick={() => handleResponse('decline')}
+                  disabled={isSubmitting || selectedResponse !== null}
                   className={`font-display text-lg px-8 py-6 transition-all duration-300 ${
                     selectedResponse === 'decline'
                       ? 'bg-gatsby-cream/20 text-gatsby-cream border-2 border-gatsby-cream/60 scale-105'
-                      : 'bg-gatsby-dark border-2 border-gatsby-gold/20 text-gatsby-cream/70 hover:border-gatsby-gold/40'
+                      : 'bg-gatsby-dark border-2 border-gatsby-gold/20 text-gatsby-cream/70 hover:border-gatsby-gold/40 disabled:opacity-50 disabled:cursor-not-allowed'
                   }`}
                 >
                   <Icon name="X" size={20} className="mr-2" />
