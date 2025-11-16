@@ -34,6 +34,18 @@ const Index = () => {
             <div className="h-px bg-gatsby-gold/30 mx-auto w-3/4"></div>
           </div>
 
+          <div className="mt-12 mb-8">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
+              <div className="absolute inset-0 border-4 border-gatsby-gold/30 rotate-45"></div>
+              <div className="absolute inset-2 border-2 border-gatsby-gold/20 rotate-45"></div>
+              <img 
+                src="https://cdn.poehali.dev/files/983c4238-f387-4ae9-82ff-d289acfb9a12.jpeg" 
+                alt="Юбилей" 
+                className="relative w-full h-full object-cover rounded-lg shadow-2xl shadow-gatsby-gold/20"
+              />
+            </div>
+          </div>
+
           <div className="flex justify-center items-center gap-2 mt-12">
             <div className="w-3 h-3 border-2 border-gatsby-gold rotate-45"></div>
             <div className="w-2 h-2 bg-gatsby-gold"></div>
